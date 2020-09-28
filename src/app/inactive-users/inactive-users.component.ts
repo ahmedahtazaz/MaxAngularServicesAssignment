@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { DataService } from '../DataService/data.service';
 
 @Component({
   selector: 'app-inactive-users',
@@ -7,9 +8,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class InactiveUsersComponent {
   @Input() users: string[];
-  @Output() userSetToActive = new EventEmitter<number>();
+
+  constructor(private dataService: DataService){}
 
   onSetToActive(id: number) {
-    this.userSetToActive.emit(id);
+    this.dataService.setToActive(id);
   }
 }
