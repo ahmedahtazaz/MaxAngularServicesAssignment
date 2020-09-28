@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DataService } from '../DataService/data.service';
 
 @Component({
@@ -6,10 +6,14 @@ import { DataService } from '../DataService/data.service';
   templateUrl: './active-users.component.html',
   styleUrls: ['./active-users.component.css']
 })
-export class ActiveUsersComponent {
-  @Input() users: string[];
+export class ActiveUsersComponent implements OnInit {
+  users: string[];
 
   constructor(private dataService: DataService){}
+
+  ngOnInit(): void {
+    this.users = this.dataService.activeUsers;
+  }
 
   onSetToInactive(id: number) {
     this.dataService.setToInActive(id);
